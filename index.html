@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>List Baju Angkatan 25</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+button {
+    background: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+button:hover {
+    background: darkgreen;
+}
+
+.status {
+    color: red;
+    font-weight: bold;
+}
+
+.sudah {
+    color: green;
+}
+</style>
+</head>
+
+<body>
+
+<h2>List Baju Angkatan 25</h2>
+
+<div class="container" id="list">
+
+</div>
+
+<script>
+
+let data = [
+{nama:"Azriel Miracle Yuandre", nim:"251410024", ukuran:"L"},
+{nama:"Esti Anggraini", nim:"251410031", ukuran:"S"},
+{nama:"Serlin Selviana Giay", nim:"251410030", ukuran:"S"},
+{nama:"Agis Lyoni Putri", nim:"251410022", ukuran:"M"},
+{nama:"Aghista Bunga Kirani", nim:"251410027", ukuran:"S"},
+{nama:"Usman Yakin Trio Sinada", nim:"251410006", ukuran:"L"},
+{nama:"Muhammad Bagas Putra Andeza", nim:"251410003", ukuran:"XL"},
+{nama:"Alicia Putri Lestari", nim:"251410011", ukuran:"L"},
+{nama:"Jeinnet Verara Ayomi", nim:"251410033", ukuran:"S"},
+{nama:"Marta Saputra", nim:"251410020", ukuran:"M"},
+{nama:"Putri Ananda Amelia", nim:"251410029", ukuran:"M"},
+{nama:"Marsya Dwi Lintang", nim:"251410028", ukuran:"M"},
+{nama:"Uliya Gumpari", nim:"251410008", ukuran:"M"},
+{nama:"Rifqi Prayoga", nim:"251410005", ukuran:"L"},
+{nama:"Ratu Klarisa Rahadianti", nim:"251410010", ukuran:"L"},
+{nama:"Herly Afrizal", nim:"251410002", ukuran:"L"},
+{nama:"Adriel Nofra Marcelino", nim:"251410017", ukuran:"L"},
+{nama:"Yoza Ulpia Rafila", nim:"251410004", ukuran:"M"},
+{nama:"M. Bagas Khoirullah", nim:"251410016", ukuran:"M"},
+{nama:"Wegi Alsez Jaya Putra", nim:"251410007", ukuran:"L"},
+{nama:"Nabilah Cahya Suci", nim:"251410018", ukuran:"M"},
+{nama:"Rado Aditiya", nim:"251410012", ukuran:"M"},
+{nama:"Nabila Amanda", nim:"251410023", ukuran:"L"},
+{nama:"Saskia Mauli Tantria", nim:"251410034", ukuran:"M"},
+{nama:"Fajar Rio Dinata", nim:"251410025", ukuran:"L"},
+{nama:"Putra Dhafir Nashrullah", nim:"251410009", ukuran:"L"},
+{nama:"Rikson Lifo Rumbewas", nim:"251420019", ukuran:"L"},
+{nama:"M Algerija Hertyaz Paslam", nim:"251410021", ukuran:"L"}
+];
+
+let list = document.getElementById("list");
+
+data.forEach((item, index) => {
+
+    list.innerHTML += `
+    <div class="card">
+        <h3>${item.nama}</h3>
+        <p>NIM: ${item.nim}</p>
+        <p>Ukuran: ${item.ukuran}</p>
+        <p class="status" id="status${index}">Belum Bayar</p>
+
+        <button onclick="bayar(${index})">
+            Klik Jika Sudah Bayar
+        </button>
+    </div>
+    `;
+});
+
+function bayar(i){
+    document.getElementById("status"+i).innerHTML = "Sudah Bayar ✅";
+    document.getElementById("status"+i).classList.add("sudah");
+
+    alert("Status pembayaran diperbarui!");
+}
+
+</script>
+
+</body>
+</html>
