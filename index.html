@@ -11,6 +11,10 @@ body {
     padding: 20px;
 }
 
+h2 {
+    text-align: center;
+}
+
 .container {
     max-width: 600px;
     margin: auto;
@@ -22,24 +26,38 @@ body {
     margin: 10px 0;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 button {
     background: green;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 5px;
     position: absolute;
     right: 15px;
     top: 15px;
+    cursor: pointer;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.sudah {
+    color: green;
+}
+
+.belum {
+    color: red;
 }
 </style>
 </head>
 
 <body>
 
-<h2 align="center">List Baju Angkatan 25</h2>
+<h2>List Baju Angkatan 25</h2>
 
 <div class="container" id="list"></div>
 
@@ -75,23 +93,31 @@ let data = [
 {nama:"Herly Afrizal", nim:"251410002", ukuran:"L"},
 {nama:"Adriel Nofra Marcelino", nim:"251410017", ukuran:"L"},
 {nama:"Yoza Ulpia Rafila", nim:"251410004", ukuran:"M"},
-{nama:"M Bagas Khoirullah", nim:"251410016", ukuran:"M"},
+{nama:"M. Bagas Khoirullah", nim:"251410016", ukuran:"M"},
 {nama:"Wegi Alsez Jaya Putra", nim:"251410007", ukuran:"L"},
-{nama:"Nabila Cahya Suci", nim:"251410018", ukuran:"M"},
-{nama:"Rado Aditya", nim:"251410012", ukuran:"M"},
+{nama:"Nabilah Cahya Suci", nim:"251410018", ukuran:"M"},
+{nama:"Rado Aditiya", nim:"251410012", ukuran:"M"},
 {nama:"Nabila Amanda", nim:"251410023", ukuran:"L"},
 {nama:"Saskia Mauli Tantria", nim:"251410034", ukuran:"M"},
 {nama:"Fajar Rio Dinata", nim:"251410025", ukuran:"L"},
-{nama:"Putra Dhafir Nasrullah", nim:"251410009", ukuran:"L"},
-{nama:"Rikson Lifo Rumbewas", nim:"251410019", ukuran:"L"},
+{nama:"Putra Dhafir Nashrullah", nim:"251410009", ukuran:"L"},
+{nama:"Rikson Lifo Rumbewas", nim:"251420019", ukuran:"L"},
 {nama:"M Algerija Hertyaz Paslam", nim:"251410021", ukuran:"L"}
-
-
 ];
 
 let list = document.getElementById("list");
 
 data.forEach((item, index) => {
+
+    let status = localStorage.getItem("status"+index);
+
+    let statusText = "Belum Bayar";
+    let statusClass = "belum";
+
+    if(status === "sudah"){
+        statusText = "Sudah Bayar ✅";
+        statusClass = "sudah";
+    }
 
     let tombol = "";
 
@@ -104,7 +130,9 @@ data.forEach((item, index) => {
         <h3>${item.nama}</h3>
         <p>NIM: ${item.nim}</p>
         <p>Ukuran: ${item.ukuran}</p>
-        <p id="status${index}">Belum Bayar</p>
+        <p id="status${index}" class="status ${statusClass}">
+            ${statusText}
+        </p>
         ${tombol}
     </div>
     `;
@@ -112,6 +140,9 @@ data.forEach((item, index) => {
 
 function bayar(i){
     document.getElementById("status"+i).innerHTML = "Sudah Bayar ✅";
+    document.getElementById("status"+i).className = "status sudah";
+
+    localStorage.setItem("status"+i, "sudah");
 }
 
 </script>
